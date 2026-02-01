@@ -24,6 +24,13 @@ function inferExample(schema) {
   } else if (schema.default !== undefined) {
     example = schema.default;
   }
+  // Provide a reasonable default for strings if no example is found
+  // This is especially important for path parameters
+  // Check for undefined, null, or empty string
+  if ((example === undefined || example === null || example === '') && 
+      (schema.type === 'string' || !schema.type)) {
+    example = 'string';
+  }
   return example;
 }
 

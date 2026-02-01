@@ -14,7 +14,8 @@ export function allOfSample(into, children, options, spec, context) {
     res.type = res.type || type;
     res.readOnly = res.readOnly || readOnly;
     res.writeOnly = res.writeOnly || writeOnly;
-    if (value != null) subSamples.push(value);
+    // Include empty strings as valid values for merging
+    if (value != null || value === '') subSamples.push(value);
   }
 
   if (res.type === 'object') {
